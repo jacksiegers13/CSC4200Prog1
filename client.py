@@ -17,7 +17,7 @@ def decrypt_message(encrypted_message):
     decrypted_bytes = unpad(cipher.decrypt(base64.b64decode(encrypted_message)), AES.block_size)
     return decrypted_bytes.decode()
 
-# TCP Client (client.py)
+# TCP Client
 class TCPClient:
     def __init__(self, server_host='127.0.0.1', server_port=12345):
         self.server_host = server_host
@@ -26,25 +26,21 @@ class TCPClient:
     def send_message(self, message):
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((self.server_host, self.server_port))
-        encrypted_message = encrypt_message(message)
-        client_socket.send(encrypted_message.encode())
-        response = decrypt_message(client_socket.recv(1024).decode())
-        print(f"Server response: {response}")
-        client_socket.close()
-
-if __name__ == "__main__":
-    import sys
-    if len(sys.argv) > 1 and sys.argv[1] == "server":
-        server = TCPServer()
-        server.start()
-    elif len(sys.argv) > 1 and sys.argv[1] == "client":
-        client = TCPClient()
+        
         while True:
+            encrypted_message = encrypt_message(message)
+            client_socket.send(encrypted_message.encode())
+            response = decrypt_message(client_socket.recv(1024).decode())
+            print(f"Server response: {response}")
+
+            # Ask for more messages
             message = input("Enter a message (or type 'exit' to quit): ")
             if message.lower() == 'exit':
                 break
-            client.send_message(message)
-    else:
-        print("Usage: python server.py or python client.py")
-    client.send_message(message)
 
+        client_socket.close()
+
+if __name__ == "__main__":
+    client = TCPClient()
+    first_message = input("Enter a message: ")
+    client.send_message(first_message)

@@ -1,6 +1,5 @@
 import socket
 import threading
-import os
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 import base64
@@ -19,7 +18,7 @@ def decrypt_message(encrypted_message):
     decrypted_bytes = unpad(cipher.decrypt(base64.b64decode(encrypted_message)), AES.block_size)
     return decrypted_bytes.decode()
 
-# TCP Server (server.py)
+# TCP Server
 class TCPServer:
     def __init__(self, host='0.0.0.0', port=12345):
         self.host = host
@@ -52,3 +51,7 @@ class TCPServer:
             client_socket, addr = self.server_socket.accept()
             client_thread = threading.Thread(target=self.handle_client, args=(client_socket, addr), daemon=True)
             client_thread.start()
+
+if __name__ == "__main__":
+    server = TCPServer()
+    server.start()
