@@ -17,7 +17,7 @@ def decrypt_message(encrypted_message):
     decrypted_bytes = unpad(cipher.decrypt(base64.b64decode(encrypted_message)), AES.block_size)
     return decrypted_bytes.decode()
 
-# TCP Client
+# TCP Client (client.py)
 class TCPClient:
     def __init__(self, server_host='127.0.0.1', server_port=12345):
         self.server_host = server_host
@@ -33,7 +33,18 @@ class TCPClient:
         client_socket.close()
 
 if __name__ == "__main__":
-    message = input("Enter a message: ")
-    client = TCPClient()
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "server":
+        server = TCPServer()
+        server.start()
+    elif len(sys.argv) > 1 and sys.argv[1] == "client":
+        client = TCPClient()
+        while True:
+            message = input("Enter a message (or type 'exit' to quit): ")
+            if message.lower() == 'exit':
+                break
+            client.send_message(message)
+    else:
+        print("Usage: python server.py or python client.py")
     client.send_message(message)
 
