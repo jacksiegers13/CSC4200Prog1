@@ -1,7 +1,7 @@
-# Makefile for TCP Client-Server Project
+# Makefile 
 
 build:
-	@echo "No compilation needed for Python."
+	@echo "No compilation needed"
 
 run-server:
 	python server.py
@@ -10,4 +10,4 @@ run-client:
 	python client.py
 
 clean:
-	@echo "No build artifacts to remove."
+	@echo "Nothing to clean"

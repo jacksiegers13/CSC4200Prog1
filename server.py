@@ -1,3 +1,7 @@
+#CSC4200-Server
+#Jack Siegers
+#3/16/2025
+
 import socket
 import threading
 from Crypto.Cipher import AES
@@ -51,7 +55,3 @@ class TCPServer:
             client_socket, addr = self.server_socket.accept()
             client_thread = threading.Thread(target=self.handle_client, args=(client_socket, addr), daemon=True)
             client_thread.start()
-
-if __name__ == "__main__":
-    server = TCPServer()
-    server.start()
