@@ -9,8 +9,8 @@ from Crypto.Util.Padding import pad, unpad
 import base64
 
 # Encryption settings
-KEY = b'JackSiegersKey13'  # 16 bytes for AES-128
-IV = b'JackSiegersIVKey'  # 16 bytes IV
+KEY = b'ThisIsASecretKey'  # 16 bytes for AES-128
+IV = b'ThisIsAnIVVector'  # 16 bytes IV
 
 def encrypt_message(message):
     cipher = AES.new(KEY, AES.MODE_CBC, IV)
