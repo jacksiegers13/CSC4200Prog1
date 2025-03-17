@@ -1,3 +1,7 @@
+#CSC4200-Client
+#Jack Siegers
+#3/16/2025
+
 import socket
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
