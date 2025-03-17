@@ -1,3 +1,7 @@
+#CSC4200-Server
+#Jack Siegers
+#3/16/2025
+
 import socket
 import threading
 import os
