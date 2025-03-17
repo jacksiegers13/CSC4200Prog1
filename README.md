@@ -1,4 +1,4 @@
-TCP Client-Server Project
+CSC4200Program1
 
 Overview:
 A Python-based multi-threaded TCP client-server system with AES encryption for secure communication.
